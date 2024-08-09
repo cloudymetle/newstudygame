@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ผจญภัยในดินแดนภาษาไทย</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ผจญภัยในดินแดนภาษาไทย</h1>
+        <div class="question" id="question">คำถาม: เลือกคำที่ถูกต้องตามหลักไวยากรณ์</div>
+        <div class="options">
+            <button onclick="checkAnswer(0)">ตัวเลือก 1</button>
+            <button onclick="checkAnswer(1)">ตัวเลือก 2</button>
+            <button onclick="checkAnswer(2)">ตัวเลือก 3</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <button id="link-button" class="link-button" onclick="window.location.href='https://sites.google.com/view/new-study-game/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81'">กลับไปยัง newstudy game</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "คำถาม: เลือกคำที่ถูกต้องตามหลักไวยากรณ์",
+                options: ["กินข้าว", "กินข่าว", "กินคราว"],
+                correct: 0
+            },
+            {
+                question: "คำถาม: เลือกความหมายที่ถูกต้องของคำว่า 'สวัสดี'",
+                options: ["ลาก่อน", "ขอโทษ", "สวัสดี"],
+                correct: 2
+            },
+            {
+                question: "คำถาม: เลือกคำที่สะกดถูกต้อง",
+                options: ["ลักา", "รักษา", "ลักษา"],
+                correct: 1
+            },
+            {
+                question: "คำถาม: เลือกคำที่มีความหมายตรงข้ามกับ 'ร้อน'",
+                options: ["หนาว", "เย็น", "อบอุ่น"],
+                correct: 0
+            },
+            {
+                question: "คำถาม: เลือกประโยคที่ถูกต้องตามหลักไวยากรณ์",
+                options: ["เธอไปโรงเรียน", "เธอไปโรงเรียนไป", "โรงเรียนเธอไป"],
+                correct: 0
+            },
+            {
+                question: "คำถาม: เลือกคำที่ถูกต้องตามหลักไวยากรณ์",
+                options: ["เดินไป", "เดินไปมา", "เดินไปโรง"],
+                correct: 0
+            },
+            {
+                question: "คำถาม: เลือกคำที่มีความหมายเหมือนกับ 'เร็ว'",
+                options: ["ช้า", "ไว", "เนิ่น"],
+                correct: 1
+            },
+            {
+                question: "คำถาม: เลือกคำที่มีความหมายตรงข้ามกับ 'สว่าง'",
+                options: ["มืด", "สว่างไสว", "แสงสว่าง"],
+                correct: 0
+            },
+            {
+                question: "คำถาม: เลือกคำที่สะกดถูกต้อง",
+                options: ["ขอบคุน", "ขอบคุณ", "ขอบคุง"],
+                correct: 1
+            },
+            {
+                question: "คำถาม: เลือกความหมายที่ถูกต้องของคำว่า 'อำลา'",
+                options: ["ลาก่อน", "สวัสดี", "ขอโทษ"],
+                correct: 0
+            },
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("question").textContent = q.question;
+            const buttons = document.querySelectorAll(".options button");
+            buttons.forEach((button, index) => {
+                button.textContent = q.options[index];
+            });
+            document.getElementById("feedback").textContent = "";
+        }
+
+        function checkAnswer(selected) {
+            const feedback = document.getElementById("feedback");
+            if (selected === questions[currentQuestion].correct) {
+                feedback.textContent = "ตอบถูกต้อง!";
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < questions.length) {
+                        loadQuestion();
+                    } else {
+                        feedback.textContent = "คุณผ่านด่านทั้งหมดแล้ว!";
+                        document.getElementById("link-button").style.display = "inline-block";
+                    }
+                }, 1000);
+            } else {
+                feedback.textContent = "ตอบผิด ลองอีกครั้ง";
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
